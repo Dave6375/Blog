@@ -25,6 +25,12 @@ const blogSource = loader({
     source: toFumadocsSource(docs, meta),
 });
 
+export async function generateStaticParams() {
+    return blogSource.getPages().map((page) => ({
+        slug: page.slugs[0],
+    }));
+}
+
 const formatDate = (date: Date): string => {
     return date.toLocaleDateString("en-US", {
         year: "numeric",
@@ -36,7 +42,7 @@ const formatDate = (date: Date): string => {
 function BlogContent({ body }: { body: any }) {
     const MDX = body;
     return (
-        <article className="prose dark:prose-invert max-w-none prose-headings:scroll-mt-8 prose-headings:font-bold prose-a:text-primary prose-a:no-underline hover:prose-a:underline prose-headings:tracking-tight prose-h1:text-4xl prose-h1:mb-6 prose-h2:text-3xl prose-h2:mt-12 prose-h2:mb-6 prose-h3:text-2xl prose-h3:mt-8 prose-h3:mb-4 prose-h4:text-xl prose-h4:mt-6 prose-h4:mb-3 prose-p:text-lg prose-p:leading-8 prose-p:text-foreground/90 prose-p:mb-6 prose-li:text-lg prose-li:leading-7 prose-li:mb-2 prose-ul:my-6 prose-ol:my-6 prose-strong:font-semibold prose-strong:text-foreground prose-code:text-sm prose-code:bg-muted prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-pre:bg-muted prose-pre:border prose-pre:border-border prose-img:rounded-lg prose-img:shadow-lg prose-blockquote:border-l-4 prose-blockquote:border-primary prose-blockquote:pl-4 prose-blockquote:italic">
+        <article className="prose dark:prose-invert max-w-none font-sans prose-headings:scroll-mt-8 prose-headings:font-bold prose-a:text-primary prose-a:no-underline hover:prose-a:underline prose-headings:tracking-tight prose-h1:text-4xl prose-h1:mb-6 prose-h2:text-3xl prose-h2:mt-12 prose-h2:mb-6 prose-h3:text-2xl prose-h3:mt-8 prose-h3:mb-4 prose-h4:text-xl prose-h4:mt-6 prose-h4:mb-3 prose-p:text-lg prose-p:leading-8 prose-p:text-foreground/90 prose-p:mb-6 prose-li:text-lg prose-li:leading-7 prose-li:mb-2 prose-ul:my-6 prose-ol:my-6 prose-strong:font-semibold prose-strong:text-foreground prose-code:text-sm prose-code:bg-muted prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-code:font-mono prose-pre:bg-muted prose-pre:border prose-pre:border-border prose-pre:font-mono prose-img:rounded-lg prose-img:shadow-lg prose-blockquote:border-l-4 prose-blockquote:border-primary prose-blockquote:pl-4 prose-blockquote:italic">
             <MDX />
         </article>
     );

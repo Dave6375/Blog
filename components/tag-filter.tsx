@@ -10,6 +10,7 @@ import {
     DrawerContent,
     DrawerHeader,
     DrawerBody,
+    DrawerTitle,
 } from "@/components/ui/drawer";
 
 interface TagFilterProps {
@@ -68,7 +69,7 @@ export function TagFilter({ tags, selectedTag, tagCounts }: TagFilterProps) {
 
             <DrawerContent className="md:hidden">
                 <DrawerHeader>
-                    <h3 className="font-semibold text-sm">Select Category</h3>
+                    <DrawerTitle className="text-sm">Select Category</DrawerTitle>
                 </DrawerHeader>
 
                 <DrawerBody>

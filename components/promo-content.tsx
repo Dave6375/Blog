@@ -22,7 +22,7 @@ export function PromoContent({
 
                 <div className='flex items-center gap-3'>
                     <img
-                        src='/logo.png'
+                        src='/app/favicon.ico'
                         alt='Blog'
                         className='w-8 h-8 rounded object-cover flex-shrink-0'
                     />
@@ -55,7 +55,7 @@ export function PromoContent({
 
             <div className='flex flex-col gap-4'>
                 <img
-                    src='/logo.png'
+                    src='/app/favicon.ico'
                     alt='Blog'
                     className='w-full h-40 rounded-md object-cover'
                 />

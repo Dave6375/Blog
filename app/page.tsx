@@ -5,6 +5,8 @@ import { Suspense } from "react";
 import { BlogCard } from "@/components/blog-card";
 import { TagFilter } from "@/components/tag-filter";
 import { FlickeringGrid } from "@/components/magicui/flickering-grid";
+import { InteractiveGridPattern } from "@/components/magicui/interactive-grid-pattern";
+import { cn } from '@/lib/utils';
 
 interface BlogData {
     title: string;
@@ -36,12 +38,7 @@ const formatDate = (date: Date): string => {
     });
 };
 
-export default async function HomePage({
-                                           searchParams,
-                                       }: {
-    searchParams: Promise<{ tag?: string }>;
-}) {
-    const resolvedSearchParams = await searchParams;
+export default async function HomePage() {
     const allPages = blogSource.getPages() as BlogPage[];
     const sortedBlogs = allPages.sort((a, b) => {
         const dateA = new Date(a.data.date).getTime();
@@ -56,11 +53,8 @@ export default async function HomePage({
         ).sort(),
     ];
 
-    const selectedTag = resolvedSearchParams.tag || "All";
-    const filteredBlogs =
-        selectedTag === "All"
-            ? sortedBlogs
-            : sortedBlogs.filter((blog) => blog.data.tags?.includes(selectedTag));
+    const selectedTag = "All";
+    const filteredBlogs = sortedBlogs;
 
     const tagCounts = allTags.reduce((acc, tag) => {
         if (tag === "All") {
@@ -76,13 +70,12 @@ export default async function HomePage({
     return (
         <div className="min-h-screen bg-background relative">
             <div className="absolute top-0 left-0 z-0 w-full h-[200px] [mask-image:linear-gradient(to_top,transparent_25%,black_95%)]">
-                <FlickeringGrid
-                    className="absolute top-0 left-0 size-full"
-                    squareSize={4}
-                    gridGap={6}
-                    color="#6B7280"
-                    maxOpacity={0.2}
-                    flickerChance={0.05}
+                <InteractiveGridPattern
+                    className={cn(
+                        "[mask-image:radial-gradient(400px_circle_at_center,white,transparent)]",
+                        "inset-x-0 inset-y-[-30%] h-[200%] skew-y-12"
+                    )}
+
                 />
             </div>
             <div className="p-6 border-b border-border flex flex-col gap-6 min-h-[250px] justify-center relative z-10">

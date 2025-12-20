@@ -9,6 +9,13 @@ const blogSource = loader({
     source: toFumadocsSource(docs, meta),
 });
 
+export async function generateStaticParams() {
+    return blogSource.getPages().map((page) => ({
+        slug: page.slugs[0],
+    }));
+}
+
+export const dynamic = "force-static";
 export const runtime = "nodejs";
 export const alt = "Blog Post";
 export const size = {
